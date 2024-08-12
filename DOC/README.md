@@ -1,154 +1,155 @@
-7-Zip 24.07 Sources
--------------------
+# 7-Zip Source Code
 
 7-Zip is a file archiver for Windows. 
 
+### License Info
+----------------
+
 7-Zip Copyright (C) 1999-2024 Igor Pavlov.
 
-
-License Info
-------------
-
 7-Zip is free software distributed under the GNU LGPL 
-(except for unRar code). Also some  code
+(except for `unRAR` code). Also some  code
 is licensed under the "BSD 3-clause License".
-Read "License.txt" for more infomation about license.
+Read `License.txt` for more infomation about licensing.
 
-Notes about unRAR license:
+Notes about `unRAR` license:
 
-Please check main restriction from unRar license:
+Please check main restriction from `unRAR` license:
 
-   2. The unRAR sources may be used in any software to handle RAR
+   2. The `unRAR` sources may be used in any software to handle `*.RAR`
       archives without limitations free of charge, but cannot be used
       to re-create the RAR compression algorithm, which is proprietary.
-      Distribution of modified unRAR sources in separate form or as a
+      Distribution of modified `unRAR` sources in separate form or as a
       part of other software is permitted, provided that it is clearly
       stated in the documentation and source comments that the code may
-      not be used to develop a RAR (WinRAR) compatible archiver.
+      not be used to develop a RAR compatible archiver (`WinRAR`) 
 
 In brief it means:
 1) You can compile and use compiled files under GNU LGPL rules, since 
-   unRAR license almost has no restrictions for compiled files.
+   `unRAR` license almost has no restrictions for compiled files.
    You can link these compiled files to LGPL programs.
 2) You can fix bugs in source code and use compiled fixed version.
-3) You can not use unRAR sources to re-create the RAR compression algorithm.
+3) You can not use `unRAR` sources to re-create the RAR compression algorithm.
 
 
-LZMA SDK
---------
+## LZMA SDK
+----------
 
 This package also contains some files from LZMA SDK
-You can download LZMA SDK from:
-  http://www.7-zip.org/sdk.html
+You can download the LZMA SDK from: <https://www.7-zip.org/sdk.html>
 LZMA SDK is written and placed in the public domain by Igor Pavlov.
 
 
-How to compile in Windows
+## How to compile in Windows
 -------------------------
 
-To compile the sources to Windows binaries you need Visual Studio compiler and/or Windows SDK.
-You can use latest Windows Studio 2017/2019/2022 to compile binaries for x86, x64, arm64 and arm platforms.
+To compile the sources to Windows binaries you need Visual Studio compiler and / or Windows SDK.
+You can use modern Windows Studio 2017/2019/2022 to compile binaries for x86, x64, ARM, ARM64 platforms.
 Also you can use old compilers for some platforms:
-  x86   : Visual C++ 6.0 with Platform SDK
-  x64   : Windows Server 2003 R2 Platform SDK
-  ia64 (itanium)  : Windows Server 2003 R2 Platform SDK
-  arm for Windows CE : Standard SDK for Windows CE 5.0
+
+* x86   : Visual C++ 6.0 with Platform SDK
+* x64   : Windows Server 2003 R2 Platform SDK
+* IA64 (Itanium)  : Windows Server 2003 R2 Platform SDK
+* ARM for Windows CE : Standard SDK for Windows CE 5.0
 
 If you use MSVC6, specify also Platform SDK directories at top of directories lists:
 Tools / Options / Directories
-  - Include files
-  - Library files
+* Include files
+* Library files
 
-Also you need Microsoft Macro Assembler:
-  - ml.exe for x86 
-  - ml64.exe for x64
-You can use ml.exe from Windows SDK for Windows Vista or some later versions.
+## Also you need Microsoft Macro Assembler:
+  * `ml.exe` for x86 
+  * `ml64.exe` for x64
+You can use `ml.exe` from Windows SDK for Windows Vista+ or some later versions.
 
-There are two ways to compile 7-Zip binaries:
-1) via makefile in command line.
-2) via dsp file in Visual Studio.
+### There are two ways to compile 7-Zip binaries:
+1) via `makefile` in command line.
+2) via `dsp` file in Visual Studio.
 
-The dsp file compiling can be used for development and debug purposes.
-All final 7-Zip binaries are compiled via makefiles, that provide best
+The `dsp` file compiling can be used for development and debug purposes.
+All final 7-Zip binaries are compiled via `makefile`s, that provide best
 optimization options.
 
 
-How to compile with makefile
-----------------------------
+## How to compile with `makefile`
+--------------------------------
 
-Some macronames can be defined for compiling with makefile:
+Some `macronames` can be defined for compiling with `makefile`:
 
-PLATFORM
-  with possible values: x64, x86, arm64, arm, ia64
+`PLATFORM`
+  with possible values: `x64`, `x86`, `ARM64`, `ARM`, `IA64`
 
-OLD_COMPILER
-  for old VC compiler, like MSCV 6.0.
+`OLD_COMPILER`
+  for old Visual C++ compiler, like MSVC 6.0.
 
-MY_DYNAMIC_LINK
-  for dynamic linking to the run-time library (msvcrt.dll). 
-  The default makefile option is static linking to the run-time library.
+`MY_DYNAMIC_LINK`
+  for dynamic linking to the runtime library (`msvcrt.dll`). 
+  The default `makefile` option is static-linking to the runtime library.
 
 
 
-Compiling 7-Zip for Unix/Linux
-------------------------------
+## Compiling 7-Zip for Unix / Linux
+----------------------------------
 
-There are several options to compile 7-Zip with different compilers: gcc and clang.
-Also 7-Zip code contains two versions for some parts of code: in C and in Assembeler.
-So if you compile the version with Assembeler code, you will get faster 7-Zip binary.
+There are several options to compile 7-Zip with different compilers: `gcc` and `clang`.
+Also 7-Zip code contains two versions for some parts of code: in C and in Assembler.
+So if you compile the version with Assembeler code, you will get a faster 7-Zip binary.
 
 7-Zip's assembler code uses the following syntax for different platforms:
 
 1) x86 and x86-64 (AMD64): MASM syntax. 
    There are 2 programs that supports MASM syntax in Linux.
-'    'Asmc Macro Assembler and JWasm. But JWasm now doesn't support some 
-      cpu instructions used in 7-Zip.
-   So you must install Asmc Macro Assembler in Linux, if you want to compile fastest version
-   of 7-Zip  x86 and x86-64:
-     https://github.com/nidud/asmc
+    `Asmc Macro Assembler` and `JWasm`. But `JWasm` now doesn't support some 
+      CPU instructions used in 7-Zip.
+   So you must install `Asmc Macro Assembler` in Linux, if you want to compile fastest version
+   of 7-Zip for x86 and x86-64: use (`ASMC`)[https://github.com/nidud/asmc]
 
-2) arm64: GNU assembler for ARM64 with preprocessor. 
+3) arm64: GNU assembler for ARM64 with preprocessor. 
    That systax is supported by GCC and CLANG for ARM64.
 
 There are different binaries that can be compiled from 7-Zip source.
 There are 2 main files in folder for compiling:
-  makefile        - that can be used for compiling Windows version of 7-Zip with nmake command
-  makefile.gcc    - that can be used for compiling Linux/macOS versions of 7-Zip or Windows version 
+  `makefile`        - that can be used for compiling Windows version of 7-Zip with nmake command
+  `makefile.gcc`    - that can be used for compiling Linux/macOS versions of 7-Zip or Windows version 
                     with MINGW (GCC) with make command.
                    
 At first you must change the current folder to folder that contains `makefile.gcc`:
 
-  cd CPP/7zip/Bundles/Alone2
+  `cd CPP/7zip/Bundles/Alone2`
 
 Then you can compile `makefile.gcc` with the command:
 
-  make -j -f makefile.gcc
+```bash
+make -j -f makefile.gcc
+```
 
-Also there are additional "*.mak" files in folder "CPP/7zip/" that can be used to compile 
+Also there are additional `*.mak` files in folder `CPP/7zip/` that can be used to compile 
 7-Zip binaries with optimized code and optimzing options.
 
 To compile with GCC without assembler:
-  cd CPP/7zip/Bundles/Alone2
-  make -j -f ../../cmpl_gcc.mak
-
+```bash
+cd CPP/7zip/Bundles/Alone2
+make -j -f ../../cmpl_gcc.mak
+```
 To compile with CLANG without assembler:
-  make -j -f ../../cmpl_clang.mak
-
+```bash
+make -j -f ../../cmpl_clang.mak
+```
 To compile 7-Zip for x86-64 with asmc assembler:
-  make -j -f ../../cmpl_gcc_x64.mak
+  `make -j -f ../../cmpl_gcc_x64.mak`
 
 To compile 7-Zip for arm64 with assembler:
-  make -j -f ../../cmpl_gcc_arm64.mak
+  `make -j -f ../../cmpl_gcc_arm64.mak`
 
 To compile 7-Zip for arm64 for macOS:
-  make -j -f ../../cmpl_mac_arm64.mak
+ `make -j -f ../../cmpl_mac_arm64.mak`
 
-Also you can change some compiler options in the "mak" files:
-  cmpl_gcc.mak
-  var_gcc.mak
-  warn_gcc.mak
+Also you can change some compiler options in the `*.mak` files:
+  `cmpl_gcc.mak`
+  `var_gcc.mak`
+  `warn_gcc.mak`
 
-makefile.gcc supports some variables that can change compile options
+`makefile.gcc` supports some variables that can change compile options
 
 USE_JWASM=1
   use JWasm assembler instead of Asmc.
